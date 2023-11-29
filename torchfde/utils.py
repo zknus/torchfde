@@ -20,7 +20,7 @@ def _check_inputs(func, y0, t, step_size,method,beta, SOLVERS):
     # check t is a float tensor, if not  convert it to one
     if not isinstance(t, torch.Tensor):
         t = torch.tensor(t, dtype=torch.float32, device=y0.device)
-        print("t converted to tensor")
+        # print("t converted to tensor")
     else:
         t = t.to(y0.device)
     # check t is > 0 else raise error
@@ -34,7 +34,7 @@ def _check_inputs(func, y0, t, step_size,method,beta, SOLVERS):
     # check beta is a float tensor, if not  convert it to one
     if not isinstance(beta, torch.Tensor):
         beta = torch.tensor(beta, dtype=torch.float32, device=y0.device)
-        print("beta converted to tensor")
+        # print("beta converted to tensor")
     else:
         beta = beta.to(y0.device)
     # check beta is > 0 else raise error
@@ -47,7 +47,7 @@ def _check_inputs(func, y0, t, step_size,method,beta, SOLVERS):
     # check stepsize is a float tensor, if not  convert it to one
     if not isinstance(step_size, torch.Tensor):
         step_size = torch.tensor(step_size, dtype=torch.float32, device=y0.device)
-        print("step_size converted to tensor")
+        # print("step_size converted to tensor")
     else:
         step_size = step_size.to(y0.device)
     # check step_size is > 0 else raise error

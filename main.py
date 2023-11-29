@@ -28,5 +28,12 @@ if __name__ == '__main__':
     # y = fdeint(f, y0, beta, t, step_size=0.1,method='corrector',options={'corrector_step':2})
     # print("Euler Corrector: ", y.item())
 
+    y = fdeint(f, y0, beta, t, step_size=0.1,method='gl')
+    print("GL: ", y.item())
+
+    y = fdeint(f, y0, beta, t, step_size=0.1,method='trap')
+
+    print("Trap: ", y.item())
+
     y_gt = t ** 2 - t
     print("ground truth: ", y_gt)
