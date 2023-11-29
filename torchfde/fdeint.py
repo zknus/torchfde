@@ -12,8 +12,10 @@ last update: create this file
 
 from .utils import _check_inputs
 from .explicit_solver import Predictor,Predictor_Corrector
+from .implicit_solver import Implicit_l1
 SOLVERS = {"predictor":Predictor,
           "corrector":Predictor_Corrector,
+           "implicitl1":Implicit_l1,
 
 }
 

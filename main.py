@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
 
     y0 = torch.tensor([0])
-    t = 40
+    t = 10
     beta = 0.5
 
     y = fdeint(f, y0, beta, t, step_size=0.1,method='predictor')
@@ -22,8 +22,11 @@ if __name__ == '__main__':
     y = fdeint(f, y0, beta, t, step_size=0.1,method='predictor',options={'memory':399})
     print("Euler Predictor Memory: ", y.item())
 
-    y = fdeint(f, y0, beta, t, step_size=0.1,method='corrector',options={'corrector_step':2})
-    print("Euler Corrector: ", y.item())
+    y = fdeint(f, y0, beta, t, step_size=0.1,method='implicitl1')
+    print("Implicit L1: ", y.item())
+
+    # y = fdeint(f, y0, beta, t, step_size=0.1,method='corrector',options={'corrector_step':2})
+    # print("Euler Corrector: ", y.item())
 
     y_gt = t ** 2 - t
     print("ground truth: ", y_gt)
