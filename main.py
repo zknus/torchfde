@@ -17,6 +17,11 @@ if __name__ == '__main__':
 
     y = fdeint(f, y0, beta, t, step_size=0.1,method='predictor')
     print("Euler Predictor: ", y.item())
+
+
+    y = fdeint(f, y0, beta, t, step_size=0.1,method='predictor',options={'memory':399})
+    print("Euler Predictor Memory: ", y.item())
+
     y = fdeint(f, y0, beta, t, step_size=0.1,method='corrector',options={'corrector_step':2})
     print("Euler Corrector: ", y.item())
 
