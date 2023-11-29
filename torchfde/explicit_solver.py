@@ -35,15 +35,24 @@ def Predictor(func,y0,beta,tspan,**options):
     fhistory = []
     device = y0.device
     yn = y0.clone()
-    
+
 
     for k in range(N):
         tn = tspan[k]
         f_k = func(tn,yn)
         fhistory.append(f_k)
+
+        # can apply short memory here
+        if 'memory' not in options:
+            memory = k
+        else:
+            memory = options['memory']
+        memory_k = max(0, k - memory)
+
+
         j_vals = torch.arange(0, k + 1, dtype=torch.float32,device=device).unsqueeze(1)
         b_j_k_1 = (fractional_pow(h, beta) / beta) * (fractional_pow(k + 1 - j_vals, beta) - fractional_pow(k - j_vals, beta))
-        temp_product = torch.stack([b_j_k_1[i] * fhistory[i] for i in range(k + 1)])
+        temp_product = torch.stack([b_j_k_1[i] * fhistory[i] for i in range(memory_k,k + 1)])
         b_all_k = torch.sum(temp_product, dim=0)
         yn = y0 + gamma_beta * b_all_k
     # release memory
