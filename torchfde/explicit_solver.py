@@ -119,50 +119,6 @@ def Predictor_Corrector(func,y0,beta,tspan,**options):
 
 
 
-def Predictor_Shortmemory(func,y0,beta,tspan):
-    """Use one-step Adams-Bashforth (Euler) method to integrate Caputo equation
-        D^beta y(t) = f(t,y)
-        Args:
-          beta: fractional exponent in the range (0,1)
-          f: callable(y,t) returning a numpy array of shape (d,)
-             Vector-valued function to define the right hand side of the system
-          y0: array of shape (d,) giving the initial state vector y(t==0)
-          tspan (array): The sequence of time points for which to solve for y.
-            These must be equally spaced, e.g. np.arange(0,10,0.005)
-            tspan[0] is the intial time corresponding to the initial state y0.
-        Returns:
-          y: array, with shape (len(tspan), len(y0))
-             With the initial value y0 in the first row
-        Raises:
-          FODEValueError
-        See also:
-          K. Diethelm et al. (2004) Detailed error analysis for a fractional Adams
-             method
-          C. Li and F. Zeng (2012) Finite Difference Methods for Fractional
-             Differential Equations
-        """
-    N = len(tspan)
-    # print("N: ", N)
-    h = (tspan[-1] - tspan[0]) / (N - 1)
-    # print("h: ", h)
-    gamma_beta =  1 / math.gamma(beta)
-    fhistory = []
-    yn = y0.clone()
-
-    for k in range(N):
-        tn = tspan[k]
-        f_k = func(tn,yn)
-        fhistory.append(f_k)
-        j_vals = torch.arange(0, k + 1, dtype=torch.float32).unsqueeze(1).to(y0.device)
-        b_j_k_1 = (fractional_pow(h, beta) / beta) * (fractional_pow(k + 1 - j_vals, beta) - fractional_pow(k - j_vals, beta)).to(y0.device)
-        temp_product = torch.stack([b_j_k_1[i] * fhistory[i] for i in range(k + 1)])
-        b_all_k = torch.sum(temp_product, dim=0)
-        yn = y0 + gamma_beta * b_all_k
-    # release memory
-    del fhistory
-    del b_j_k_1
-    del temp_product
-    return yn
 
 
 
