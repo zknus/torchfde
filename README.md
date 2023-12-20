@@ -18,3 +18,27 @@ y = fdeint(f, y0, beta, t, step_size=0.1,method='corrector',options={'corrector_
 # corrector_step: correct times of corrector method
 
 ```
+
+
+## cite us if you use this code in your research
+```
+@inproceedings{FROND2023,
+    title={Unleashing the Potential of Fractional Calculus in Graph Neural Networks},
+    author = {Qiyu Kang and Kai Zhao and Qinxu Ding and Feng Ji and Xuhao Li and Wenfei Liang and Yang Song and Wee Peng Tay},
+    booktitle = {Adv. Neural Inform. Process. Syst. Workshop on Machine Learning and the Physical Sciences},
+    year = {2023},
+}
+```
+```
+@INPROCEEDINGS{ZhaKanSon:C24,
+author = {Qiyu Kang and Kai Zhao and Yang Song and Yihang Xie and Yanan Zhao and Sijie Wang and Rui She and Wee Peng Tay},
+title = {Coupling Graph Neural Networks with Fractional Order Continuous Dynamics: {A} Robustness Study},
+booktitle = {Proc. AAAI Conference on Artificial Intelligence},
+volume = {},
+pages = {},
+month = {Feb.},
+year = {2024},
+address = {Vancouver, Canada},
+}
+```
+
